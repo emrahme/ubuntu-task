@@ -2,5 +2,11 @@
   hosts: ubuntu-task
   become: yes
   tasks:
-    - name: Install latest version of Apache
+    - name: Install latest version of 
       apt: name=apache2 update_cache=yes state=latest
+   
+    - name: Make sure a service is running
+      systemd:
+        state: started
+        name: apache2
+        enabled: yes
