@@ -2,11 +2,23 @@
   hosts: ubuntu-task
   become: yes
   tasks:
-    - name: Install latest version of 
-      apt: name=apache2 update_cache=yes state=latest
+    - name: Install latest version of Apache 
+      apt: name=apache2  update_cache=yes state=latest
    
     - name: Make sure a service is running
       systemd:
         state: started
         name: apache2
         enabled: yes
+
+    - name : Install unzip package
+      apt: name=unzip state=present update_cache=true
+
+    - name: Unarchive a file that needs to be downloaded (added in 2.0)
+      unarchive:
+        src: https://www.free-css.com/assets/files/free-css-templates/download/page1/news-magazine.zip
+        dest: /var/www/
+        remote_src: yes
+
+
+
